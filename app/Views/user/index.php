@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 <?php if (empty(session()->get('account'))) {
-  return view('/auth/login');
+  // return redirect()->back();
 } ?>
 
 <div class="container">
@@ -22,6 +22,7 @@
             <th scope="col">Nama Produk</th>
             <th scope="col">Asal Produk</th>
             <th scope="col">Harga Produk</th>
+            <th scope="col">Stok</th>
             <th scope="col">Transaksi</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@
               <td><?= $produk['name']; ?></td>
               <td><?= $produk['source']; ?></td>
               <td>Rp<?= number_format($produk['price'], 0, ',', '.'); ?></td>
+              <td><?= $produk['quantity']; ?></td>
               <td>
                 <a href="/user/detail/<?= $produk['id']; ?>" class="btn btn-info">Detail</a>
                 <a href="/user/create/<?= $produk['id']; ?>" class="btn btn-success">Beli</a>

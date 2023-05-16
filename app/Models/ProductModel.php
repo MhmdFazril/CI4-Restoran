@@ -19,4 +19,9 @@ class ProductModel extends Model
 
         return $this->where(['id' => $id])->first();
     }
+
+    public function updateQuantity($id)
+    {
+        return $this->where(['id' => $id]);
+    }
 }

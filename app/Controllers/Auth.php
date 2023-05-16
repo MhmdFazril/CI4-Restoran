@@ -66,14 +66,13 @@ class Auth extends BaseController
 
         if ($this->request->getVar('password') == $this->request->getVar('confirm_password')) {
 
-            // $passwordHash = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT);
-            // $this->accountModel->save([
-            //     'username' => $this->request->getVar('username'),
-            //     'email' => $this->request->getVar('email'),
-            //     'password' => $passwordHash,
-            //     'role' => 'user',
-
-            // ]);
+            $passwordHash = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT);
+            $this->accountModel->save([
+                'username' => $this->request->getVar('username'),
+                'email' => $this->request->getVar('email'),
+                'password' => $passwordHash,
+                'role' => 'admin',
+            ]);
             session()->setFlashdata('alert', 'Akun berhasil dibuat, silahkan login');
 
             $data = [

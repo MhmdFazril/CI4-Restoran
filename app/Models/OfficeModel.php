@@ -4,21 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TransaksiModel extends Model
+class OfficeModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'transaction_sale';
+    protected $table            = 'master_office';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['id_product', 'quantity', 'id_account', 'id_name_office'];
+    protected $allowedFields    = ['office_name'];
 
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_time';
+    protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
@@ -39,17 +39,8 @@ class TransaksiModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getProduct($id = false)
+    public function getOfficeName($id_office)
     {
-        if ($id == false) {
-            $this->select('transaction_sale.*,master_product.name,master_product.price,master_account.username,master_office.office_name');
-            $this->join('master_product', 'master_product.id = id_product');
-            $this->join('master_account', 'master_account.id = id_account');
-            $this->join('master_office', 'master_office.id = id_office');
-
-            return $this->findAll();
-        }
-
-        return $this->where(['id' => $id])->first();
+        return $this->where(['office_name' => $id_office]);
     }
 }
