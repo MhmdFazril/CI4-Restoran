@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ProductModel extends Model
 {
     protected $table = 'master_product';
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $allowedFields = ['photo', 'name', 'price', 'description', 'source', 'material', 'quantity'];
 
 
@@ -22,6 +22,6 @@ class ProductModel extends Model
 
     public function updateQuantity($id)
     {
-        return $this->where(['id' => $id]);
+        return $this->select('quantity')->where('id', $id)->first();
     }
 }

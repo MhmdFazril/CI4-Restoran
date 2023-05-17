@@ -38,9 +38,4 @@ class OfficeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getOfficeName($id_office)
-    {
-        return $this->where(['office_name' => $id_office]);
-    }
 }

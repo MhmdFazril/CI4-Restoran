@@ -3,13 +3,14 @@
 <?= $this->section('content'); ?>
 <div class="container">
     <div class="row">
-        <h2 class="mt-2 mb-4">Histori Pembelian</h2>
+        <h2 class="mt-3 mb-4">Histori Pembelian</h2>
 
         <table class="table table-success table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nama Produk</th>
+                    <th scope="col">Nama Pembeli</th>
                     <th scope="col">Harga Produk</th>
                     <th scope="col">Jumlah Pembelian</th>
                     <th scope="col">Subtotal</th>
@@ -26,6 +27,7 @@
                     <tr>
                         <th scope="row"><?= $i; ?></th>
                         <td><?= $list['name']; ?></td>
+                        <td><?= $list['buyer']; ?></td>
                         <td>Rp <?= number_format($list['price'], 0, ',', '.'); ?></td>
                         <td><?= $list['quantity']; ?></td>
                         <td>Rp <?= number_format($list['price'] * $list['quantity'], 0, ',', '.'); ?></td>

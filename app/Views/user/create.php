@@ -19,12 +19,25 @@
             <h4>Rp<?= number_format($product['price'], 0, ',', '.'); ?></h4>
             <br>
             <form action="/user/save" method="">
+                <input type="hidden" name="id" id="id" value="<?= $product['id'] ?>">
+                <input type="hidden" name="office" id="office" value="<?= $product['id'] ?>">
+
+                <div class="form-group row">
+                    <label for="pembeli" class="col-sm-2 col-form-label"><b>Nama Pembeli</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control <?= isset($error['pembeli']) ? 'is-invalid' : '' ?>" id="pembeli" name="pembeli" value="" placeholder="nama pembeli barang" autofocus>
+                        <div class="invalid-feedback">
+                            <?= isset($error['pembeli']) ? $error['pembeli'] : ''; ?>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div class="form-group row">
                     <label for="jumlah" class="col-sm-2 col-form-label"><b>Jumlah</b></label>
                     <div class="col-sm-10">
-                        <input type="hidden" name="id" id="id" value="<?= $product['id'] ?>">
-                        <input type="hidden" name="office" id="office" value="<?= $product['id'] ?>">
-                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="" placeholder="Jumlah barang" autofocus>
+                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="" placeholder="Jumlah barang">
                         <div class="invalid-feedback">
                             <?= isset($error['jumlah']) ? $error['jumlah'] : ''; ?>
                         </div>

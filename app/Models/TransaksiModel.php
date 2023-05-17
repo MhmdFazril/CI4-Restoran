@@ -13,7 +13,7 @@ class TransaksiModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['id_product', 'quantity', 'id_account', 'id_name_office'];
+    protected $allowedFields = ['id_product', 'quantity', 'id_account', 'id_office', 'buyer'];
 
     // Dates
     protected $useTimestamps = false;

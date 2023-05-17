@@ -57,18 +57,33 @@ class Users extends BaseController
                     'required' => '{field} tidak boleh kosong',
                 ]
             ],
+            'pembeli' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                ]
+            ],
         ])) {
             return redirect()->back()->withInput();
         }
 
         $id_product = $this->request->getVar('id');
         $jumlah_product = $this->request->getVar('jumlah');
+        $pembeli = $this->request->getVar('pembeli');
+        $quantity_product = $this->productModel->updateQuantity($id_product);
+        $pengurangan_stok = $quantity_product['quantity'] - $jumlah_product;
 
         $this->transaksiModel->save([
             'id_product' => $id_product,
             'quantity' => $jumlah_product,
+            'buyer' => $pembeli,
             'id_account' => session()->get('account')['id'],
             'id_office' => session()->get('account')['id_name_office'],
+        ]);
+
+        $this->productModel->save([
+            'id' => $id_product,
+            'quantity' => $pengurangan_stok
         ]);
 
         session()->setFlashdata('pesan', 'Produk berhasil dipesan');
@@ -79,7 +94,7 @@ class Users extends BaseController
     public function keranjang($sessionName = '')
     {
         $data = [
-            'title' => 'Keranjang',
+            'title' => 'History',
             'item' => $this->transaksiModel->getProduct()
         ];
 
