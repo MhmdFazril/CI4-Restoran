@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col">
       <h2 class="mt-4 mb-2">Dashboard</h2>
-      <a href="admin/add-product" class="btn btn-primary mb-2">Add Product</a>
+      <a href="admin/add-product" class="btn btn-primary mb-2">[+] Add Product</a>
       <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
           <?= session()->getFlashdata('pesan'); ?>

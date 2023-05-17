@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('content'); ?>
-<div class="container">
+<div class="container form-wrapper">
     <div class="row">
         <div class="col">
             <h2 class="mt-2 mb-3">Detail Product</h2>
@@ -19,7 +19,9 @@
                             <p class="card-text">Bahan Makanan : <?= $product['material']; ?></p>
                             <h5 class="card-text"><b>Harga : <?= number_format($product['price'], 0, ',', '.'); ?></b></h5>
                             <br>
-                            <a href="/dashboard" class="btn btn-success">Kembali</a>
+                            <a href="/dashboard" class="btn btn-success mr-2">Kembali</a>
+                            <a href="/dashboard/edit/<?= $product['id']; ?>" class="btn btn-warning mr-2">Perbarui</a>
+                            <a href="/dashboard/delete/<?= $product['id']; ?>" class="btn btn-danger mr-2" onclick="return confirm('Yakin hapus?')">Delete</a>
                         </div>
                     </div>
                 </div>

@@ -88,7 +88,7 @@ class Users extends BaseController
 
         session()->setFlashdata('pesan', 'Produk berhasil dipesan');
 
-        return redirect()->to('/user/dashboard');
+        return redirect()->to('/dashboard');
     }
 
     public function keranjang($sessionName = '')
@@ -188,7 +188,133 @@ class Users extends BaseController
             'quantity' => $quantity
         ]);
 
-        session()->setFlashdata('pesan', 'Data berhasil ditambahkan');
+        session()->setFlashdata('pesan', 'Product berhasil ditambahkan');
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function productEdit($id)
+    {
+        $data = [
+            'title' => 'Update Product',
+            'product' => $this->productModel->getProduct($id)
+        ];
+        return view('user/updateProduct', $data);
+    }
+
+    public function updateProduct()
+    {
+
+        //cek apakah nama diganti atau tidak
+        $namaLama = $this->productModel->getProduct($this->request->getVar('id'));
+        if ($namaLama['name'] == $this->request->getVar('name')) {
+            $rulejudul = 'required';
+        } else {
+            $rulejudul = 'required|is_unique[master_product.name]';
+        }
+
+        if (!$this->validate([
+            'name' => [
+                'rules' => $rulejudul,
+                'errors' => [
+                    'required' => 'nama tidak boleh kosong',
+                    'is_unique' => 'nama sudah terdaftar'
+                ]
+            ],
+            'price' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'harga tidak boleh kosong',
+                ]
+            ],
+            'description' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'deskripsi tidak boleh kosong',
+                ]
+            ],
+            'quantity' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'jumlah stock tidak boleh kosong',
+                ]
+            ],
+            'source' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'kolom asal tidak boleh kosong',
+                ]
+            ],
+            'material' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'bahan tidak boleh kosong',
+                ]
+            ],
+            'foto' => [
+                'rules' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'ukuran gambar terlalu besar',
+                    'is_image' => 'file yang diupload bukan gambar',
+                    'mime_in' => 'selain format jpg, jpeg, dan png tidak diterima'
+                ]
+            ]
+        ])) {
+            return redirect()->back()->withInput();
+        }
+
+        $id = $this->request->getVar('id');
+        $name = $this->request->getVar('name');
+        $price = $this->request->getVar('price');
+        $description = $this->request->getVar('description');
+        $quantity = $this->request->getVar('quantity');
+        $source = $this->request->getVar('source');
+        $material = $this->request->getVar('material');
+        $photo = $this->request->getFile('foto');
+
+        //cek gambar apakah diganti atau tidak
+        if ($photo->getError() == 4) {
+            $photoName = $this->request->getVar('photoLama');
+        } else {
+            //generate file random
+            $photoName = $photo->getRandomName();
+            //move gambar
+            $photo->move('img/img_upload', $photoName);
+            //hapus file yang lama
+            unlink('img/img_upload/' . $this->request->getVar('photoLama'));
+        }
+
+        $this->productModel->save([
+            'id' => $id,
+            'photo' => $photoName,
+            'name' => $name,
+            'price' => $price,
+            'description' => $description,
+            'source' => $source,
+            'material' => $material,
+            'quantity' => $quantity
+        ]);
+
+        session()->setFlashdata('pesan', 'Product berhasil diupdate');
+
+        return redirect()->to('/dashboard');
+    }
+
+    public function productDelete($id)
+    {
+        //cari gambar berdasarkan id
+        $product = $this->productModel->find($id);
+
+        // pengecekan untuk default.jpeg
+        if ($product['photo'] != 'default.jpeg') {
+            //hapus gambar yang di direktori
+            unlink('img/img_upload/' . $product['photo']);
+        }
+
+
+        $this->productModel->delete($id);
+
+        session()->setFlashdata('pesan', 'Product berhasil dihapus');
 
         return redirect()->to('/dashboard');
     }

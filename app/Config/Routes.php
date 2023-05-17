@@ -37,6 +37,14 @@ $routes->post('/auth/create', 'Auth::createAccount');
 // untuk masuk ke dasboard
 $routes->get('/dashboard', 'Users::index');
 
+// untuk edit product
+$routes->get('/dashboard/edit/(:segment)', 'Users::productEdit/$1');
+$routes->post('/admin/update-product', 'Users::updateProduct');
+
+
+// untuk delete product
+$routes->get('/dashboard/delete/(:segment)', 'Users::productDelete/$1');
+
 // untuk menambah produk
 $routes->get('/admin/add-product', 'Users::addProduct');
 $routes->post('/admin/save-product', 'Users::saveProduct');
