@@ -8,7 +8,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mt-4 mb-4">Dashboard</h2>
+      <h2 class="mt-4 mb-2">Dashboard</h2>
+      <a href="admin/add-product" class="btn btn-primary mb-2">Add Product</a>
       <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
           <?= session()->getFlashdata('pesan'); ?>
@@ -31,7 +32,7 @@
           <?php foreach ($product as $produk) : ?>
             <tr>
               <th scope="row"><?= $i; ?></th>
-              <td><img src="/img/default.jpeg" alt="" class="sampul"></td>
+              <td><img src="/img/img_upload/<?= $produk['photo']; ?>" alt="" class="sampul"></td>
               <td><?= $produk['name']; ?></td>
               <td><?= $produk['source']; ?></td>
               <td>Rp<?= number_format($produk['price'], 0, ',', '.'); ?></td>

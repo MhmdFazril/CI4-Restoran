@@ -34,10 +34,12 @@ $routes->get('/logout', 'Auth::logout');
 $routes->post('/auth/check', 'Auth::user');
 $routes->post('/auth/create', 'Auth::createAccount');
 
-
 // untuk masuk ke dasboard
-$routes->get('/user/dashboard', 'Users::index');
-$routes->get('/admin/dashboard', 'Admin::index');
+$routes->get('/dashboard', 'Users::index');
+
+// untuk menambah produk
+$routes->get('/admin/add-product', 'Users::addProduct');
+$routes->post('/admin/save-product', 'Users::saveProduct');
 
 // untuk masuk ke create
 $routes->get('/user/create/(:segment)', 'Users::create/$1');

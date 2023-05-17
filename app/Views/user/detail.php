@@ -9,7 +9,7 @@
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="/img/default.jpeg" class="img-fluid rounded-start sampul-detail" alt="...">
+                        <img src="/img/img_upload/<?= $product['photo']; ?>" class="img-fluid rounded-start sampul-detail" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -19,7 +19,7 @@
                             <p class="card-text">Bahan Makanan : <?= $product['material']; ?></p>
                             <h5 class="card-text"><b>Harga : <?= number_format($product['price'], 0, ',', '.'); ?></b></h5>
                             <br>
-                            <a href="/user/dashboard" class="btn btn-success">Kembali</a>
+                            <a href="/dashboard" class="btn btn-success">Kembali</a>
                         </div>
                     </div>
                 </div>

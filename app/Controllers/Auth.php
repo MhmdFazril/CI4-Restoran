@@ -112,7 +112,7 @@ class Auth extends BaseController
         if (password_verify($password, $record['password'])) {
 
             session()->set('account', $record);
-            return redirect()->to(base_url('/user/dashboard'));
+            return redirect()->to(base_url('/dashboard'));
         } else {
             session()->setFlashdata('alert-login', 'password atau Username salah');
             return redirect()->to(base_url('/'))->withInput();

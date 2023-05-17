@@ -7,7 +7,7 @@
             <?php $error = session()->get('_ci_validation_errors'); ?>
             <h4>RINCIAN PEMBELIAN</h4>
             <hr>
-            <img src="/img/default.jpeg" alt="" class="sampul-beli">
+            <img src="/img/img_upload/<?= $product['photo']; ?>" alt="" class="sampul-beli">
             <hr>
             <h3 class="mb-2"><?= strtoupper($product['name']); ?></h3>
             <p><i><?= $product['description']; ?></i></p>
@@ -23,9 +23,9 @@
                 <input type="hidden" name="office" id="office" value="<?= $product['id'] ?>">
 
                 <div class="form-group row">
-                    <label for="pembeli" class="col-sm-2 col-form-label"><b>Nama Pembeli</b></label>
+                    <label for="pembeli" class="col-sm-2 col-form-label">Nama Pembeli</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control <?= isset($error['pembeli']) ? 'is-invalid' : '' ?>" id="pembeli" name="pembeli" value="" placeholder="nama pembeli barang" autofocus>
+                        <input type="text" class="form-control <?= isset($error['pembeli']) ? 'is-invalid' : '' ?>" id="pembeli" name="pembeli" value="" placeholder="nama pembeli barang" autofocus autocomplete="off">
                         <div class="invalid-feedback">
                             <?= isset($error['pembeli']) ? $error['pembeli'] : ''; ?>
                         </div>
@@ -35,9 +35,9 @@
 
 
                 <div class="form-group row">
-                    <label for="jumlah" class="col-sm-2 col-form-label"><b>Jumlah</b></label>
+                    <label for="jumlah" class="col-sm-2 col-form-label">Jumlah</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="" placeholder="Jumlah barang">
+                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="" placeholder="Jumlah barang" autocomplete="off">
                         <div class="invalid-feedback">
                             <?= isset($error['jumlah']) ? $error['jumlah'] : ''; ?>
                         </div>
