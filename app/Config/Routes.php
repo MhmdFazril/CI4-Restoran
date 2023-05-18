@@ -64,6 +64,26 @@ $routes->get('/user/histori', 'Users::keranjang');
 // pengguna registrasi
 $routes->get('/auth/register', 'Auth::register');
 
+// managament superadmin
+$routes->get('/superadmin/manage', 'SuperAdmin::index');
+
+// menu untuk me-manage admin / melihat data untuk update
+$routes->get('/superadmin/manage-admin', 'SuperAdmin::manage');
+
+// untuk menambahkan admin
+$routes->get('/superadmin/add-admin', 'SuperAdmin::create');
+
+// untuk mengedit admin
+$routes->get('/superadmin/edit-admin/(:segment)', 'SuperAdmin::editAdmin/$1');
+
+// untuk menjalankan fungsi update
+$routes->post('/superadmin/update', 'SuperAdmin::edit');
+
+// untuk menjalankan fungsi update
+$routes->post('/superadmin/add', 'SuperAdmin::add');
+
+
+
 
 
 /*

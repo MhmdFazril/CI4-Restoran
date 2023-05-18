@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Bulan Mei 2023 pada 17.41
+-- Waktu pembuatan: 18 Bulan Mei 2023 pada 15.20
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.0.25
 
@@ -29,19 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `master_account` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(100) NOT NULL
+  `role` varchar(100) NOT NULL,
+  `id_name_office` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `master_account`
 --
 
-INSERT INTO `master_account` (`id`, `username`, `email`, `password`, `role`) VALUES
-(1, 'yulianto', 'yulianto@gmail.com', 'qwerty', 'customer'),
-(7, 'test', 'admin@gmail.com', '$2y$10$YVrSSFAAoxKTuH9XavMLzOzadqobJTZzUp09ngdzVzuFfljoJk2Bu', 'user');
+INSERT INTO `master_account` (`id`, `name`, `username`, `email`, `password`, `role`, `id_name_office`) VALUES
+(10, 'superadmin', 'superadmin', 'superadmin@gmail.com', '$2y$10$BAz6nHU9PI66PB5nA9L...NhcRUjK8.cTz1c0DaetKKJzmevHaWj2', 'superadmin', 2);
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,9 @@ CREATE TABLE `master_office` (
 --
 
 INSERT INTO `master_office` (`id`, `office_name`, `location`) VALUES
-(1, 'Triwijaya', 'Jakarta Barat');
+(1, 'Triwijaya', 'Jakarta Barat'),
+(2, 'Agen makanan', 'Ampera'),
+(3, 'Supply product', 'Jagakarsa');
 
 -- --------------------------------------------------------
 
@@ -84,10 +87,8 @@ CREATE TABLE `master_product` (
 --
 
 INSERT INTO `master_product` (`id`, `photo`, `name`, `price`, `description`, `source`, `material`, `quantity`) VALUES
-(1, 'test1', 'test1', 120000, 'Sebuah pemandangan alam yang menakjubkan terbentang di depan mata, dengan perbukitan hijau yang menghampar luas dan jajaran pegunungan yang menjulang gagah di kejauhan. Langit cerah dengan awan-awan putih yang berarak melintasi langit biru, menciptakan su', 'Itali', 'udang', 0),
-(2, 'test2', 'test2', 160000, 'Sebuah pantai yang memukau dengan pasir putih lembut yang terhampar sejauh mata memandang, dihiasi dengan pohon kelapa yang menjulang tinggi. Ombak yang tenang menggulung dengan lembut ke tepi pantai, mengundang untuk berjalan-jalan santai atau berenang di air jernih yang segar.', 'Jerman', 'pasta', 0),
-(3, 'test3', 'test3', 23800, 'Sebuah pantai yang memukau dengan pasir putih lembut yang terhampar sejauh mata memandang, dihiasi dengan pohon kelapa yang menjulang tinggi. Ombak yang tenang menggulung dengan lembut ke tepi pantai, mengundang untuk berjalan-jalan santai atau berenang d', 'Indonesia', 'daging sapi', 0),
-(4, 'test4', 'test4', 540000, 'Sebuah hutan yang mistis dan rimbun, dengan pepohonan tinggi yang menjulang ke langit. Cahaya matahari yang tersaring melalui daun-daun hijau yang rapat menciptakan bayangan yang menarik di tanah yang ditumbuhi rerumputan. Bunyi riuh pepohonan dan nyanyia', 'Jepang', 'ikan salmon', 0);
+(6, '1684349050_0f4d59a56f267caa9e83.jpeg', 'Rendang', 12000, 'rendang merupakan masakan daging yang dimasak dalam campuran rempah-rempah yang kaya dan bumbu-bumbu aromatik yang khas. Rendang biasanya menggunakan daging sapi yang dipotong menjadi potongan kecil dan dimasak dalam campuran bumbu yang terdiri dari serai, jahe, bawang merah, bawang putih, cabai, lengkuas, daun jeruk, dan rempah-rempah lainnya.', 'Indonesia, Padang', 'daging sapi', 6),
+(7, '1684384064_7bae52ca5d7009ab9d0e.jpg', 'Sate Ayam', 20000, 'Dalam hidangan ini, potongan-potongan daging ayam yang telah ditusuk dengan tusuk sate dipanggang di atas bara api atau grill. Daging ayam yang telah dibumbui dengan campuran rempah-rempah khas, seperti bawang putih, jahe, kunyit, dan kecap manis, memberikan cita rasa yang kaya dan lezat pada sate ayam.', 'Indonesia, Jawa', 'Ayam', 2);
 
 -- --------------------------------------------------------
 
@@ -99,17 +100,11 @@ CREATE TABLE `transaction_sale` (
   `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
+  `buyer` varchar(255) NOT NULL,
   `id_account` int(11) NOT NULL,
   `id_office` int(11) NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `transaction_sale`
---
-
-INSERT INTO `transaction_sale` (`id`, `id_product`, `quantity`, `id_account`, `id_office`, `created_time`) VALUES
-(3, 3, 4, 7, 1, '2023-05-14 14:36:00');
 
 --
 -- Indexes for dumped tables
@@ -119,7 +114,8 @@ INSERT INTO `transaction_sale` (`id`, `id_product`, `quantity`, `id_account`, `i
 -- Indeks untuk tabel `master_account`
 --
 ALTER TABLE `master_account`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `master_account_fk` (`id_name_office`);
 
 --
 -- Indeks untuk tabel `master_office`
@@ -150,29 +146,35 @@ ALTER TABLE `transaction_sale`
 -- AUTO_INCREMENT untuk tabel `master_account`
 --
 ALTER TABLE `master_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_office`
 --
 ALTER TABLE `master_office`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_product`
 --
 ALTER TABLE `master_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaction_sale`
 --
 ALTER TABLE `transaction_sale`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `master_account`
+--
+ALTER TABLE `master_account`
+  ADD CONSTRAINT `master_account_fk` FOREIGN KEY (`id_name_office`) REFERENCES `master_office` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `transaction_sale`

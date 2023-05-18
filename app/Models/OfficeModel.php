@@ -38,4 +38,13 @@ class OfficeModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getIdOffice($nama = false)
+    {
+        if ($nama == false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['office_name' => $nama])->first();
+    }
 }

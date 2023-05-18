@@ -41,6 +41,12 @@ class Auth extends BaseController
                     'is_unique' => '{field} sudah terdaftar'
                 ]
             ],
+            'name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong',
+                ]
+            ],
             'email' => [
                 'rules' => 'required|valid_email',
                 'errors' => [
@@ -61,13 +67,14 @@ class Auth extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to(base_url('/auth/register'))->withInput();
+            return redirect()->back()->withInput();
         }
 
         if ($this->request->getVar('password') == $this->request->getVar('confirm_password')) {
 
             $passwordHash = password_hash($this->request->getVar('password'), PASSWORD_BCRYPT);
             $this->accountModel->save([
+                'name' => $this->request->getVar('name'),
                 'username' => $this->request->getVar('username'),
                 'email' => $this->request->getVar('email'),
                 'password' => $passwordHash,

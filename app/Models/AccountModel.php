@@ -13,7 +13,7 @@ class AccountModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['username', 'email', 'password', 'role', 'id_name_office'];
+    protected $allowedFields    = ['name', 'username', 'email', 'password', 'role', 'id_name_office'];
 
     // Dates
     protected $useTimestamps = false;
@@ -42,6 +42,8 @@ class AccountModel extends Model
     public function getAccount($id = false)
     {
         if ($id == false) {
+            $this->select('master_account.*,master_office.office_name');
+            $this->join('master_office', 'master_office.id = id_name_office');
             return $this->findAll();
         }
 

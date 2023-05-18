@@ -41,14 +41,14 @@
                                         <form action="auth/check" method="post">
                                             <div class="form-floating mb-3">
                                                 <label for="inputUsername ">Username</label>
-                                                <input class="form-control <?= isset($error['username']) ? 'is-invalid' : '' ?>" id="inputUsername" type="text" placeholder="Admin12" name="username" />
+                                                <input class="form-control <?= isset($error['username']) ? 'is-invalid' : '' ?>" id="inputUsername" type="text" placeholder="Admin12" name="username" value="<?= old('username'); ?>" autocomplete="off" />
                                                 <div class="invalid-feedback">
                                                     <?= isset($error['username']) ? $error['username'] : ''; ?>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <label for="inputPassword">Password</label>
-                                                <input class="form-control <?= isset($error['password']) ? 'is-invalid' : '' ?>" id="inputPassword" type="password" placeholder="Password" name="password" />
+                                                <input class="form-control <?= isset($error['password']) ? 'is-invalid' : '' ?>" id="inputPassword" type="password" placeholder="Password" name="password" value="<?= old('password'); ?>" />
                                                 <div class="invalid-feedback">
                                                     <?= isset($error['password']) ? $error['password'] : ''; ?>
                                                 </div>
@@ -57,9 +57,6 @@
                                                 <button class="btn btn-primary ">Login</button>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="/auth/register">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
