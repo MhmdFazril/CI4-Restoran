@@ -25,17 +25,21 @@
                 <div class="form-group row">
                     <label for="pembeli" class="col-sm-2 col-form-label">Nama Pembeli</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control <?= isset($error['pembeli']) ? 'is-invalid' : '' ?>" id="pembeli" name="pembeli" value="" placeholder="Nama pembeli barang" autofocus autocomplete="off">
+                        <input type="text" class="form-control <?= isset($error['pembeli']) ? 'is-invalid' : '' ?>" id="pembeli" name="pembeli" value="<?= old('pembeli'); ?>" placeholder="Nama pembeli barang" autofocus autocomplete="off">
                         <div class="invalid-feedback">
                             <?= isset($error['pembeli']) ? $error['pembeli'] : ''; ?>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label for="jumlah" class="col-sm-2 col-form-label">Jumlah</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="" placeholder="Jumlah barang" autocomplete="off">
+                        <?php if (session()->getFlashdata('pesan')) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= session()->getFlashdata('pesan'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <input type="number" class="form-control <?= isset($error['jumlah']) ? 'is-invalid' : '' ?>" id="jumlah" name="jumlah" value="<?= old('jumlah'); ?>" placeholder="Jumlah barang" autocomplete="off">
                         <div class="invalid-feedback">
                             <?= isset($error['jumlah']) ? $error['jumlah'] : ''; ?>
                         </div>

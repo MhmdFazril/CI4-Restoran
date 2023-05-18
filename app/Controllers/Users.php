@@ -71,7 +71,14 @@ class Users extends BaseController
         $jumlah_product = $this->request->getVar('jumlah');
         $pembeli = $this->request->getVar('pembeli');
         $quantity_product = $this->productModel->updateQuantity($id_product);
-        $pengurangan_stok = $quantity_product['quantity'] - $jumlah_product;
+
+        //pengecekan apabila jumlah pembelian melebihi stock
+        if ($quantity_product['quantity'] - $jumlah_product < 0) {
+            session()->setFlashdata('pesan', 'Jumlah pembelian melebihi stock');
+            return redirect()->back()->withInput();
+        } else {
+            $pengurangan_stok = $quantity_product['quantity'] - $jumlah_product;
+        }
 
         $this->transaksiModel->save([
             'id_product' => $id_product,
