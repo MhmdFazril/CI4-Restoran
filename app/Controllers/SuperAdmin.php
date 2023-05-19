@@ -199,4 +199,13 @@ class SuperAdmin extends BaseController
         //     'name' => $name,
         // ])
     }
+
+    public function deleteAdmin($id)
+    {
+        $this->accountModel->delete($id);
+
+        session()->setFlashdata('pesan', 'Product berhasil dihapus');
+
+        return redirect()->to('/superadmin/manage-admin');
+    }
 }

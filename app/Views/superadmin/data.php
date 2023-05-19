@@ -22,22 +22,31 @@
         </thead>
         <tbody>
             <?php $i = 1 ?>
-            <?php foreach ($list as $admin) : ?>
-                <?php if ($admin['role'] != 'superadmin') : ?>
-                    <tr>
-                        <th scope="row"><?= $i; ?></th>
-                        <td><?= $admin['name']; ?></td>
-                        <td><?= $admin['username']; ?></td>
-                        <td><?= $admin['email']; ?></td>
-                        <td><?= $admin['office_name']; ?></td>
-                        <td><?= $admin['role']; ?></td>
-                        <td>
-                            <a href="/superadmin/edit-admin/<?= $admin['id']; ?>" class="btn btn-warning text-white">Edit</a>
-                        </td>
-                    </tr>
-                    <?php $i++ ?>
-                <?php endif ?>
-            <?php endforeach ?>
+            <?php if (!count($list) == 0) : ?>
+                <?php foreach ($list as $admin) : ?>
+                    <?php if ($admin['role'] != 'superadmin') : ?>
+                        <tr>
+                            <th scope="row"><?= $i; ?></th>
+                            <td><?= $admin['name']; ?></td>
+                            <td><?= $admin['username']; ?></td>
+                            <td><?= $admin['email']; ?></td>
+                            <td><?= $admin['office_name']; ?></td>
+                            <td><?= $admin['role']; ?></td>
+                            <td>
+                                <a href="/superadmin/edit-admin/<?= $admin['id']; ?>" class="btn btn-warning text-white">Edit</a>
+                                <a href="/superadmin/delete-admin/<?= $admin['id']; ?>" class="btn btn-danger mr-2" onclick="return confirm('Yakin hapus?')">Delete</a>
+                            </td>
+                        </tr>
+                        <?php $i++ ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="6">
+                        <h3>Belum ada admin</h3>
+                    </td>
+                </tr>
+            <?php endif ?>
         </tbody>
     </table>
 </div>

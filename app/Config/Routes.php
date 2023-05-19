@@ -79,8 +79,11 @@ $routes->get('/superadmin/edit-admin/(:segment)', 'SuperAdmin::editAdmin/$1');
 // untuk menjalankan fungsi update
 $routes->post('/superadmin/update', 'SuperAdmin::edit');
 
-// untuk menjalankan fungsi update
+// untuk menjalankan fungsi tambah
 $routes->post('/superadmin/add', 'SuperAdmin::add');
+
+// untuk menjalankan fungsi delete
+$routes->get('/superadmin/delete-admin/(:segment)', 'SuperAdmin::deleteAdmin/$1');
 
 
 

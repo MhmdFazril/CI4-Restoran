@@ -23,20 +23,29 @@
             </thead>
             <tbody>
                 <?php $i = 1; ?>
-                <?php foreach ($item as $list) : ?>
+                <?php if (!count($item) == 0) : ?>
+                    <?php foreach ($item as $list) : ?>
+                        <tr>
+                            <th scope="row"><?= $i; ?></th>
+                            <td><?= $list['name']; ?></td>
+                            <td><?= $list['buyer']; ?></td>
+                            <td>Rp <?= number_format($list['price'], 0, ',', '.'); ?></td>
+                            <td><?= $list['quantity']; ?></td>
+                            <td>Rp <?= number_format($list['price'] * $list['quantity'], 0, ',', '.'); ?></td>
+                            <td><?= $list['username']; ?></td>
+                            <td><?= $list['office_name']; ?></td>
+                            <td><?= $list['created_time']; ?></td>
+                        </tr>
+                        <?php $i++ ?>
+                    <?php endforeach ?>
+                <?php else : ?>
                     <tr>
-                        <th scope="row"><?= $i; ?></th>
-                        <td><?= $list['name']; ?></td>
-                        <td><?= $list['buyer']; ?></td>
-                        <td>Rp <?= number_format($list['price'], 0, ',', '.'); ?></td>
-                        <td><?= $list['quantity']; ?></td>
-                        <td>Rp <?= number_format($list['price'] * $list['quantity'], 0, ',', '.'); ?></td>
-                        <td><?= $list['username']; ?></td>
-                        <td><?= $list['office_name']; ?></td>
-                        <td><?= $list['created_time']; ?></td>
+                        <td colspan='9'>
+                            <h3>Belum ada transaksi</h3>
+                        </td>
                     </tr>
-                    <?php $i++ ?>
-                <?php endforeach ?>
+                <?php endif ?>
+
             </tbody>
         </table>
     </div>

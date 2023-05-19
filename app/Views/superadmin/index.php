@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="container form-wrapper">
     <h1 class="mb-4"><b>Welcome SuperAdmin</b></h1>
+    <a href="/dashboard" class="btn btn-warning">Kembali</a>
     <div class="row d-flex justify-content-around">
         <div class="card" style="width: 18rem;">
             <img src="/img/folder.png" class="card-img-top" alt="...">
