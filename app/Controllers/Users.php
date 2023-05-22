@@ -22,9 +22,14 @@ class Users extends BaseController
 
     public function index()
     {
+        $currentPage = $this->request->getVar('page_master_product') ? $this->request->getVar('page_master_product') : 1;
+
         $data = [
             'title' => 'Dashboard',
-            'product' => $this->productModel->getProduct(),
+            // 'product' => $this->productModel->getProduct(),
+            'product' => $this->productModel->paginate(4, 'master_product'),
+            'pager' => $this->productModel->pager,
+            'currentPage' => $currentPage
         ];
         return view('user/index', $data);
     }

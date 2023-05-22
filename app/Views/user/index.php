@@ -2,13 +2,16 @@
 
 <?= $this->section('content'); ?>
 <?php if (empty(session()->get('account'))) {
-  // return redirect()->back();
+  return redirect()->to(base_url('/'));
 } ?>
 
 <div class="container">
   <div class="row">
     <div class="col">
       <h2 class="mt-4 mb-2">Dashboard</h2>
+      <!-- testing session -->
+      <?php d(session()->get('account')) ?>
+      <!-- testing session -->
       <a href="admin/add-product" class="btn btn-primary mb-4">[+] Add Product</a>
       <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
@@ -28,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <?php $i = 1 ?>
+          <?php $i = 1 + (4 * ($currentPage - 1)) ?>
           <?php if (!count($product) == 0) : ?>
             <?php foreach ($product as $produk) : ?>
               <?php if ($produk['quantity'] == 0) : ?>
@@ -69,6 +72,7 @@
           <?php endif ?>
         </tbody>
       </table>
+      <?= $pager->links('master_product', 'product_pagination'); ?>
     </div>
   </div>
 </div>
