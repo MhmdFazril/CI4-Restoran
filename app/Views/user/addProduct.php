@@ -6,6 +6,7 @@
         <h2>Add Product</h2>
         <?php $error = session()->get('_ci_validation_errors'); ?>
         <form action="/admin/save-product" method="POST" enctype="multipart/form-data">
+            <?= csrf_field(); ?>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

@@ -85,6 +85,27 @@ $routes->post('/superadmin/add', 'SuperAdmin::add');
 // untuk menjalankan fungsi delete
 $routes->get('/superadmin/delete-admin/(:segment)', 'SuperAdmin::deleteAdmin/$1');
 
+// routes untuk pencarian
+$routes->post('/product/search', 'Users::search');
+
+// untuk masuk ke halaman kelola office
+$routes->get('/superadmin/manage-office', 'SuperAdmin::manageOffice');
+
+// untuk mengedit office
+$routes->get('/superadmin/edit-office/(:segment)', 'SuperAdmin::editOffice/$1');
+
+// untuk menjalankan fungsi delete office
+$routes->get('/superadmin/delete-office/(:segment)', 'SuperAdmin::deleteOffice/$1');
+
+// update office
+$routes->post('/superadmin/update-office', 'SuperAdmin::updateOffice');
+
+// add office
+$routes->post('/superadmin/addoffice', 'SuperAdmin::addOffices');
+
+// untuk menambah office
+$routes->get('/superadmin/add-office', 'Superadmin::addOffice');
+
 
 
 

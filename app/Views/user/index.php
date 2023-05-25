@@ -2,16 +2,27 @@
 
 <?= $this->section('content'); ?>
 <?php if (empty(session()->get('account'))) {
-  return redirect()->to(base_url('/'));
+  // return redirect()->to(base_url('/'));
 } ?>
 
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-6">
       <h2 class="mt-4 mb-2">Dashboard</h2>
-      <!-- testing session -->
-      <?php d(session()->get('account')) ?>
-      <!-- testing session -->
+    </div>
+    <!-- <div class="col-6 mt-3">
+      <form action="product/search" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Pencarian !!" name="keyword">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+          </div>
+        </div>
+      </form>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col">
       <a href="admin/add-product" class="btn btn-primary mb-4">[+] Add Product</a>
       <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success" role="alert">
@@ -57,7 +68,7 @@
                   <td><?= $produk['quantity']; ?></td>
                   <td>
                     <a href="/user/detail/<?= $produk['id']; ?>" class="btn btn-info">Detail</a>
-                    <a href="/user/create/<?= $produk['id']; ?>" class="btn btn-success">Beli</a>
+                    <a href="/user/create/<?= $produk['id']; ?>" class="btn btn-success">Order</a>
                   </td>
                 </tr>
               <?php endif ?>

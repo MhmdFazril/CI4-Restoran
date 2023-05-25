@@ -24,6 +24,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="/superadmin/add" method="post">
+                                    <?= csrf_field(); ?>
                                     <div class="form-floating mb-3">
                                         <label for="inputName">Name</label>
                                         <input class="form-control <?= isset($error['name']) ? 'is-invalid' : '' ?>" id="name" type="text" placeholder="MhmdFazril" name="name" value="<?= old('name'); ?>" />

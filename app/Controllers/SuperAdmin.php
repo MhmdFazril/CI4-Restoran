@@ -173,6 +173,7 @@ class SuperAdmin extends BaseController
         if ($password == $confirmPassword) {
 
             $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
             $this->accountModel->save([
                 'name' => $name,
                 'username' => $username,
@@ -188,16 +189,6 @@ class SuperAdmin extends BaseController
             session()->setFlashdata('alert-regist', 'password dan confirm password tidak sama');
             return redirect()->to(base_url('/superadmin/add-admin'))->withInput();
         }
-
-        // $this->accountModel->save([
-        //     'name' => $name,
-        //     'username' => $username,
-        //     'email' => $email,
-        //     'password' => $password,
-        //     'name' => $name,
-        //     'name' => $name,
-        //     'name' => $name,
-        // ])
     }
 
     public function deleteAdmin($id)
@@ -207,5 +198,104 @@ class SuperAdmin extends BaseController
         session()->setFlashdata('pesan', 'Product berhasil dihapus');
 
         return redirect()->to('/superadmin/manage-admin');
+    }
+
+    public function manageOffice()
+    {
+        $data = [
+            'title' => 'Data Office',
+            'list' => $this->officeModel->getOffice()
+        ];
+        return view('/superadmin/dataOffice', $data);
+    }
+
+    public function editOffice($id)
+    {
+        $data = [
+            'title' => 'Edit Office',
+            'office' => $this->officeModel->getOffice($id)
+        ];
+
+        return view('/superadmin/editOffice', $data);
+    }
+
+    public function updateOffice()
+    {
+        if (!$this->validate([
+            'name_office' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama tidak boleh kosong',
+                ]
+            ],
+            'location' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama tidak boleh kosong',
+                ]
+            ],
+        ])) {
+            return redirect()->back()->withInput();
+        }
+
+        $id = $this->request->getVar('id');
+        $name_office = $this->request->getVar('name_office');
+        $location = $this->request->getVar('location');
+
+        $this->officeModel->save([
+            'id' => $id,
+            'office_name' => $name_office,
+            'location' => $location
+        ]);
+
+        session()->setFlashdata('pesan', 'Data berhasil diupdate');
+        return redirect()->to('/superadmin/manage-office');
+    }
+
+    public function deleteOffice($id)
+    {
+        $this->officeModel->delete($id);
+
+        session()->setFlashdata('pesan', 'Product berhasil dihapus');
+
+        return redirect()->to('/superadmin/manage-office');
+    }
+
+    public function addOffice()
+    {
+        $data = [
+            'title' => 'Edit Office'
+        ];
+        return view('/superadmin/addOffice', $data);
+    }
+
+    public function addOffices()
+    {
+        if (!$this->validate([
+            'name_office' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama tidak boleh kosong',
+                ]
+            ],
+            'location' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'lokasi tidak boleh kosong',
+                ]
+            ]
+        ])) {
+            return redirect()->back()->withInput();
+        }
+
+        $name_office = $this->request->getVar('name_office');
+        $location = $this->request->getVar('location');
+
+        $this->officeModel->save([
+            'office_name' => $name_office,
+            'location' => $location,
+        ]);
+        session()->setFlashdata('pesan', 'Akun berhasil dibuat, silahkan login');
+        return redirect()->to(base_url('/superadmin/manage-office'))->withInput();
     }
 }

@@ -6,6 +6,7 @@
         <h2>Update Product</h2>
         <?php $error = session()->get('_ci_validation_errors'); ?>
         <form action="/admin/update-product" method="POST" enctype="multipart/form-data">
+            <?= csrf_field(); ?>
             <div class="row">
                 <div class="col-md-6">
                     <input type="hidden" name="id" id="id" value="<?= $product['id'] ?>">

@@ -19,6 +19,7 @@
             <h4>Rp<?= number_format($product['price'], 0, ',', '.'); ?></h4>
             <br>
             <form action="/user/save" method="">
+                <?= csrf_field(); ?>
                 <input type="hidden" name="id" id="id" value="<?= $product['id'] ?>">
                 <input type="hidden" name="office" id="office" value="<?= $product['id'] ?>">
 

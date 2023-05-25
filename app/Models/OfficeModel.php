@@ -13,7 +13,7 @@ class OfficeModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['office_name'];
+    protected $allowedFields    = ['office_name', 'location'];
 
     // Dates
     protected $useTimestamps = false;
@@ -46,5 +46,14 @@ class OfficeModel extends Model
         }
 
         return $this->where(['office_name' => $nama])->first();
+    }
+
+    public function getOffice($id = false)
+    {
+        if ($id == false) {
+            return $this->findAll();
+        }
+
+        return $this->where(['id' => $id])->first();
     }
 }

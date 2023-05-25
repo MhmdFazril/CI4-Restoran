@@ -172,7 +172,6 @@ class Users extends BaseController
         ])) {
             return redirect()->back()->withInput();
         }
-
         $name = $this->request->getVar('name');
         $price = $this->request->getVar('price');
         $description = $this->request->getVar('description');
