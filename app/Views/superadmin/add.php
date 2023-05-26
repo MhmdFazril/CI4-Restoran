@@ -61,12 +61,15 @@
                                             <label class="input-group-text" for="inputGroupSelect01">Office</label>
                                         </div>
                                         <select class="custom-select" id="inputGroupSelect01" name="office">
-                                            <option selected disabled>Choose...</option>
-                                            <option value="Triwijaya">Triwijaya</option>
-                                            <option value="Agen makanan">Agen makanan</option>
-                                            <option value="Supply product">Supply product</option>
-                                            <option value="Sambako">Sambako</option>
-                                            <option value="Posing">Posing</option>
+                                            <?php foreach ($office as $row) : ?>
+                                                <option value="<?= $row['id']; ?>"><?= $row['office_name']; ?></option>
+                                                <!-- <option selected disabled>Choose...</option>
+                                                <option value="Triwijaya">Triwijaya</option>
+                                                <option value="Agen makanan">Agen makanan</option>
+                                                <option value="Supply product">Supply product</option>
+                                                <option value="Sambako">Sambako</option>
+                                                <option value="Posing">Posing</option> -->
+                                            <?php endforeach ?>
                                         </select>
                                     </div>
                                     <div class="row mb-3">

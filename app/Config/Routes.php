@@ -29,13 +29,13 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Auth::login');
+$routes->get('/', 'Auth::login', ['filter' => 'dashboard']);
 $routes->get('/logout', 'Auth::logout');
 $routes->post('/auth/check', 'Auth::user');
 $routes->post('/auth/create', 'Auth::createAccount');
 
 // untuk masuk ke dasboard
-$routes->get('/dashboard', 'Users::index');
+$routes->get('/dashboard', 'Users::index', ['filter' => 'auth']);
 
 // untuk edit product
 $routes->get('/dashboard/edit/(:segment)', 'Users::productEdit/$1');
@@ -54,6 +54,9 @@ $routes->get('/user/create/(:segment)', 'Users::create/$1');
 
 // method save create
 $routes->get('/user/save', 'Users::save');
+
+// method cetak pdf
+$routes->get('/user/cetak', 'Users::cetak');
 
 // untuk masuk detail
 $routes->get('/user/detail/(:segment)', 'Users::detail/$1');

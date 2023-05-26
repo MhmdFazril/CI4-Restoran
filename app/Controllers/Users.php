@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\OfficeModel;
 use App\Models\ProductModel;
 use App\Models\TransaksiModel;
+use Dompdf\Dompdf;
 
 class Users extends BaseController
 {
@@ -328,5 +329,15 @@ class Users extends BaseController
         session()->setFlashdata('pesan', 'Product berhasil dihapus');
 
         return redirect()->to('/dashboard');
+    }
+
+    public function cetak()
+    {
+        $data = $this->transaksiModel->getProduct();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('/user/cetak', $data));
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        $dompdf->stream('cetak', ['Attachment' => 0]);
     }
 }

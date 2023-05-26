@@ -35,7 +35,8 @@ class SuperAdmin extends BaseController
     public function create()
     {
         $data = [
-            'title' => 'Tambah Admin'
+            'title' => 'Tambah Admin',
+            'office' => $this->officeModel->getOffice()
         ];
         return view('/superadmin/add', $data);
     }
@@ -150,25 +151,13 @@ class SuperAdmin extends BaseController
             return redirect()->back()->withInput();
         }
 
-        if ($this->request->getVar('office') == 'Triwijaya') {
-            $getIdOffice = 1;
-        } elseif ($this->request->getVar('office') == 'Agen Makanan') {
-            $getIdOffice = 2;
-        } elseif ($this->request->getVar('office') == 'Supply Product') {
-            $getIdOffice = 3;
-        } elseif ($this->request->getVar('office') == 'Sambako') {
-            $getIdOffice = 4;
-        } elseif ($this->request->getVar('office') == 'Posing') {
-            $getIdOffice = 5;
-        }
-
-
         $name = $this->request->getVar('name');
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $confirmPassword = $this->request->getVar('confirm_password');
         $role = $this->request->getVar('role');
+        $office = $this->request->getVar('office');
 
         if ($password == $confirmPassword) {
 
@@ -180,7 +169,7 @@ class SuperAdmin extends BaseController
                 'email' => $email,
                 'password' => $passwordHash,
                 'role' => $role,
-                'id_name_office' => $getIdOffice
+                'id_name_office' => $office
             ]);
             session()->setFlashdata('pesan', 'Akun berhasil dibuat, silahkan login');
 
