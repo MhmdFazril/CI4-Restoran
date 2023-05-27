@@ -333,10 +333,13 @@ class Users extends BaseController
 
     public function cetak()
     {
-        $data = $this->transaksiModel->getProduct();
+        $data = [
+            'data' => $this->transaksiModel->getProduct(),
+            'cabang' => $this->officeModel->getOffice(session()->get('account')['id_name_office'])
+        ];
         $dompdf = new Dompdf();
         $dompdf->loadHtml(view('/user/cetak', $data));
-        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream('cetak', ['Attachment' => 0]);
     }
