@@ -46,6 +46,7 @@ class TransaksiModel extends Model
             $this->join('master_product', 'master_product.id = id_product');
             $this->join('master_account', 'master_account.id = id_account');
             $this->join('master_office', 'master_office.id = id_office');
+            $this->orderBy('transaction_sale.created_time', 'DESC');
 
             return $this->findAll();
         }

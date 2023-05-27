@@ -38,7 +38,7 @@ $routes->post('/auth/create', 'Auth::createAccount');
 $routes->get('/dashboard', 'Users::index', ['filter' => 'auth']);
 
 // untuk edit product
-$routes->get('/dashboard/edit/(:segment)', 'Users::productEdit/$1');
+$routes->get('/dashboard/edit/(:segment)', 'Users::productEdit/$1', ['filter' => 'auth']);
 $routes->post('/admin/update-product', 'Users::updateProduct');
 
 
@@ -46,38 +46,38 @@ $routes->post('/admin/update-product', 'Users::updateProduct');
 $routes->get('/dashboard/delete/(:segment)', 'Users::productDelete/$1');
 
 // untuk menambah produk
-$routes->get('/admin/add-product', 'Users::addProduct');
+$routes->get('/admin/add-product', 'Users::addProduct', ['filter' => 'auth']);
 $routes->post('/admin/save-product', 'Users::saveProduct');
 
 // untuk masuk ke create
 $routes->get('/user/create/(:segment)', 'Users::create/$1');
 
 // method save create
-$routes->get('/user/save', 'Users::save');
+$routes->post('/user/save', 'Users::save');
 
 // method cetak pdf
 $routes->get('/user/cetak', 'Users::cetak');
 
 // untuk masuk detail
-$routes->get('/user/detail/(:segment)', 'Users::detail/$1');
+$routes->get('/user/detail/(:segment)', 'Users::detail/$1', ['filter' => 'auth']);
 
 //user untuk masuk ke catatan keranjang
-$routes->get('/user/histori', 'Users::keranjang');
+$routes->get('/user/histori', 'Users::keranjang', ['filter' => 'auth']);
 
 // pengguna registrasi
 $routes->get('/auth/register', 'Auth::register');
 
 // managament superadmin
-$routes->get('/superadmin/manage', 'SuperAdmin::index');
+$routes->get('/superadmin/manage', 'SuperAdmin::index', ['filter' => 'auth']);
 
 // menu untuk me-manage admin / melihat data untuk update
-$routes->get('/superadmin/manage-admin', 'SuperAdmin::manage');
+$routes->get('/superadmin/manage-admin', 'SuperAdmin::manage', ['filter' => 'auth']);
 
 // untuk menambahkan admin
-$routes->get('/superadmin/add-admin', 'SuperAdmin::create');
+$routes->get('/superadmin/add-admin', 'SuperAdmin::create', ['filter' => 'auth']);
 
 // untuk mengedit admin
-$routes->get('/superadmin/edit-admin/(:segment)', 'SuperAdmin::editAdmin/$1');
+$routes->get('/superadmin/edit-admin/(:segment)', 'SuperAdmin::editAdmin/$1', ['filter' => 'auth']);
 
 // untuk menjalankan fungsi update
 $routes->post('/superadmin/update', 'SuperAdmin::edit');
@@ -92,10 +92,10 @@ $routes->get('/superadmin/delete-admin/(:segment)', 'SuperAdmin::deleteAdmin/$1'
 $routes->post('/product/search', 'Users::search');
 
 // untuk masuk ke halaman kelola office
-$routes->get('/superadmin/manage-office', 'SuperAdmin::manageOffice');
+$routes->get('/superadmin/manage-office', 'SuperAdmin::manageOffice', ['filter' => 'auth']);
 
 // untuk mengedit office
-$routes->get('/superadmin/edit-office/(:segment)', 'SuperAdmin::editOffice/$1');
+$routes->get('/superadmin/edit-office/(:segment)', 'SuperAdmin::editOffice/$1', ['filter' => 'auth']);
 
 // untuk menjalankan fungsi delete office
 $routes->get('/superadmin/delete-office/(:segment)', 'SuperAdmin::deleteOffice/$1');

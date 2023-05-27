@@ -1,9 +1,6 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('content'); ?>
-<?php if (empty(session()->get('account'))) {
-  // return redirect()->to(base_url('/'));
-} ?>
 
 <div class="container">
   <div class="row">

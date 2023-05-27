@@ -25,9 +25,6 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header">
                                         <h3 class="text-center font-weight-light my-4">Login</h3>
-                                        <!-- testing session -->
-                                        <?php d(session()->get('account')) ?>
-                                        <!-- testing session -->
                                         <?php $error = session()->get('_ci_validation_errors'); ?>
                                         <?php if (session()->getFlashdata('alert')) : ?>
                                             <div class="alert alert-success" role="alert">

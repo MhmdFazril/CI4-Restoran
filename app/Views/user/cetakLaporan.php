@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak</title>
+    <title>Laporan Pengeluaran</title>
 
     <style>
         * {
@@ -48,11 +48,12 @@
         }
 
         .data-table th {
-            background-color: #f2f2f2;
+            background-color: #424242;
+            color: white;
         }
 
         .data-table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #B2B2B2;
         }
 
         main h2 {

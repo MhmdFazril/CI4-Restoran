@@ -6,8 +6,8 @@
         <div class="col">
             <h2 class="mt-3 ">Histori Pembelian</h2>
             <a href="/user/cetak" target="_blank" class="btn btn-success mt-2 mb-2">Cetak</a>
-            <table class="table table-success table-striped">
-                <thead>
+            <table class="table table-light table-striped">
+                <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama Produk</th>

@@ -338,9 +338,9 @@ class Users extends BaseController
             'cabang' => $this->officeModel->getOffice(session()->get('account')['id_name_office'])
         ];
         $dompdf = new Dompdf();
-        $dompdf->loadHtml(view('/user/cetak', $data));
+        $dompdf->loadHtml(view('/user/cetakLaporan', $data));
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
-        $dompdf->stream('cetak', ['Attachment' => 0]);
+        $dompdf->stream('Laporan_Pengeluaran_' . date('d-M-y'), ['Attachment' => 0]);
     }
 }
