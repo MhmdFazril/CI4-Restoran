@@ -118,7 +118,7 @@
                     <th>Harga Produk</th>
                     <th>Jumlah Pembelian</th>
                     <th>Subtotal</th>
-                    <th>admin</th>
+                    <th>Role</th>
                     <th>Kantor Cabang</th>
                     <th>Waktu Transaksi</th>
                 </tr>
