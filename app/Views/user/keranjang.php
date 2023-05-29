@@ -18,7 +18,7 @@
                         <th scope="col">Admin</th>
                         <th scope="col">Cabang</th>
                         <th scope="col">Waktu</th>
-
+                        <th scope="col">Aksi</th>
 
                     </tr>
                 </thead>
@@ -36,12 +36,13 @@
                                 <td><?= $list['username']; ?></td>
                                 <td><?= $list['office_name']; ?></td>
                                 <td><?= date_format(new DateTime($list['created_time']), "d F Y, H:i:s"); ?></td>
+                                <td><a href="/user/histori/cetak-pesanan/<?= $list['id']; ?>" class="btn btn-success" target="_blank">Cetak</a></td>
                             </tr>
                             <?php $i++ ?>
                         <?php endforeach ?>
                     <?php else : ?>
                         <tr>
-                            <td colspan='9'>
+                            <td colspan='10'>
                                 <h3>Belum ada transaksi</h3>
                             </td>
                         </tr>

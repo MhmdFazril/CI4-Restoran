@@ -51,6 +51,15 @@ class TransaksiModel extends Model
             return $this->findAll();
         }
 
-        return $this->where(['id' => $id])->first();
+        $this->select('transaction_sale.*,master_product.name,master_product.price,master_account.username,master_office.office_name');
+        $this->join('master_product', 'master_product.id = id_product');
+        $this->join('master_account', 'master_account.id = id_account');
+        $this->join('master_office', 'master_office.id = id_office');
+        return $this->where(['transaction_sale.id' => $id])->first();
+    }
+
+    public function idProduct($id)
+    {
+        return $this->where(['id_product' => $id])->get()->getResult();
     }
 }

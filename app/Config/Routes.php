@@ -64,6 +64,9 @@ $routes->get('/user/detail/(:segment)', 'Users::detail/$1', ['filter' => 'auth']
 //user untuk masuk ke catatan keranjang
 $routes->get('/user/histori', 'Users::keranjang', ['filter' => 'auth']);
 
+// cetak per product
+$routes->get('/user/histori/cetak-pesanan/(:segment)', 'Users::cetakProduk/$1');
+
 // pengguna registrasi
 $routes->get('/auth/register', 'Auth::register');
 
@@ -108,6 +111,8 @@ $routes->post('/superadmin/addoffice', 'SuperAdmin::addOffices');
 
 // untuk menambah office
 $routes->get('/superadmin/add-office', 'Superadmin::addOffice');
+
+
 
 
 

@@ -317,6 +317,13 @@ class Users extends BaseController
         //cari gambar berdasarkan id
         $product = $this->productModel->find($id);
 
+        //cek foreign key
+        if (count($this->transaksiModel->idProduct($id)) != 0) {
+            dd('ada');
+        } else {
+            dd('gkada');
+        }
+
         // pengecekan untuk default.jpeg
         if ($product['photo'] != 'default.jpeg') {
             //hapus gambar yang di direktori
@@ -342,5 +349,18 @@ class Users extends BaseController
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream('Laporan_Pengeluaran_' . date('d-M-y'), ['Attachment' => 0]);
+    }
+
+    public function cetakProduk($id)
+    {
+        $data = [
+            'data' => $this->transaksiModel->getProduct($id),
+            'cabang' => $this->officeModel->getOffice(session()->get('account')['id_name_office'])
+        ];
+        $dompdf2 = new Dompdf();
+        $dompdf2->loadHtml(view('/user/cetakProduct', $data));
+        $dompdf2->setPaper('A4', 'landscape');
+        $dompdf2->render();
+        $dompdf2->stream('Invoice Pembelian' . date('d-M-y'), ['Attachment' => 0]);
     }
 }
